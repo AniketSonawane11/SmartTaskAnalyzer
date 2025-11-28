@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Task Analyzer</title>
+
+    <!-- BOOTSTRAP CSS -->
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+</head>
+<body class="bg-light">
+
+<div class="container py-4">
+
+    <!-- HEADER -->
+    <h1 class="text-center mb-4 fw-bold">Smart Task Analyzer</h1>
+
+    <div class="row g-4">
+
+        <!-- LEFT SIDE: ADD TASK -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Add Task</h4>
+
+                    <div class="mb-3">
+                        <label class="form-label">Title</label>
+                        <input id="title" type="text" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Due Date</label>
+                        <input id="due_date" type="date" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Estimated Hours</label>
+                        <input id="hours" type="number" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Importance (1–10)</label>
+                        <input id="importance" type="number" class="form-control" min="1" max="10">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Dependencies (IDs comma separated)</label>
+                        <input id="dependencies" type="text" class="form-control">
+                    </div>
+
+                    <button onclick="addTaskToDB()" class="btn btn-primary w-100">
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- RIGHT SIDE: BULK JSON -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title mb-3">Bulk JSON Input</h4>
+                    <textarea id="bulk_json" class="form-control" rows="10"
+                    placeholder='[ { "id": "1", "title": "Fix bug", ... } ]'></textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- STRATEGY + BUTTONS -->
+    <div class="row mt-4 g-4">
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Strategy</h4>
+
+                    <select id="strategy" class="form-select mb-3">
+                        <option value="smart_balance">Smart Balance</option>
+                        <option value="fastest_wins">Fastest Wins</option>
+                        <option value="high_impact">High Impact</option>
+                        <option value="deadline_driven">Deadline Driven</option>
+                    </select>
+
+                    <button onclick="analyzeTasks()" class="btn btn-success w-100 mb-2">
+                        Analyze Tasks
+                    </button>
+
+                    <button onclick="suggestTasks()" class="btn btn-warning w-100">
+                        Suggest Top 3
+                    </button>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RESULTS -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title">Results</h4>
+                    <div id="results" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
